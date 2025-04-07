@@ -1,10 +1,10 @@
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 import { createClient } from '@supabase/supabase-js';
-import { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY } from '$env/static/private';
+import { PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY } from '$env/static/private';
 
 export const POST = (async ({ request }) => {
 	// Using service role key to bypass RLS policies
-	const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+	const supabase = createClient(PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 	
 	const data = await request.json();
 	
