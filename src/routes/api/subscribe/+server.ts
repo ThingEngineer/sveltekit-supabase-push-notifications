@@ -1,10 +1,13 @@
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 import { createClient } from '@supabase/supabase-js';
-import { PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 export const POST = (async ({ request, locals }) => {
 	// Using service role key to bypass RLS policies
-	const supabase = createClient(PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+	const supabase = createClient(
+		env.PUBLIC_SUPABASE_URL || '',
+		env.SUPABASE_SERVICE_ROLE_KEY || ''
+	);
 	
 	// For a real application, you would get the user from auth
 	// For this demo, we'll use a default username
